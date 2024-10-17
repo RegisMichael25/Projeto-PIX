@@ -44,4 +44,4 @@
     let joao = new ContaBancaria('João Silas', 590.00);
 
     
-    joao.recebimentoPix(regis.transferenciaPix(500.00, joao.nome), regis.nome);
+    joao.recebimentoPix(regis.transferenciaPix(200.00, joao.nome), regis.nome);
