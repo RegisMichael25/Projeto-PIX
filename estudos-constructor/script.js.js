@@ -1,5 +1,5 @@
     class ContaBancaria{
-        constructor (nome, valorNaConta)
+        constructor (nome, valorNaConta, data, hora)
         {
             this.nome = nome
             this.valorNaConta = valorNaConta
@@ -40,8 +40,25 @@
         }
     }
 
-    let regis = new ContaBancaria('Regis Michael', 400.00);
-    let joao = new ContaBancaria('João Silas', 590.00);
+    let dataAtual = new Date();
+
+    let ano = dataAtual.getFullYear();
+    let mes = dataAtual.getMonth() + 1;
+    let dia = dataAtual.getDate();
+
+    let horas = dataAtual.getHours();
+    let minutos = dataAtual.getMinutes();
+    let segundos = dataAtual.getSeconds();
+
+    let data = `${dia}/${mes}/${ano}`
+    let tempo = `${horas}:${minutos}:${segundos}`
+
+    console.log(data);
+    console.log(tempo);
+
+    // let regis = new ContaBancaria('Regis Michael', 400.00);
+    // let joao = new ContaBancaria('João Silas', 590.00);
 
     
-    joao.recebimentoPix(regis.transferenciaPix(200.00, joao.nome), regis.nome);
+    // joao.recebimentoPix(regis.transferenciaPix(200.00, joao.nome), regis.nome);
+    // regis.recebimentoPix(joao.transferenciaPix(400.00, regis.nome), joao.nome);
