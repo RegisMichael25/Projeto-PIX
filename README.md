@@ -7,4 +7,6 @@
 
 Meu próximo passo será uma condição se o envio for por pix saldo na conta ou pix no crédito.
 
-Push e Pull dando erro informando algo de merge
+## Dificuldades
+
+Tive algumas dificuldades com merge no repositório remoto e repositório local.
