@@ -6,3 +6,5 @@
 - No momento não possui nenhum tipo de interface ou interação com o usuário.
 
 Meu próximo passo será uma condição se o envio for por pix saldo na conta ou pix no crédito.
+
+Push e Pull dando erro informando algo de merge
