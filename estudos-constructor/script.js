@@ -64,5 +64,6 @@
     
     // type 1 -> Pix amount in the account
     // type 2 -> Pix on credit
+    
     // joao.pixReceipt(joao.pixTransfer(200.00, regis.username, '1'), joao.username);
     regis.pixReceipt(joao.pixTransfer(400.00, regis.username, '2'), joao.username);
