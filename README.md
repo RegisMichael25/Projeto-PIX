@@ -6,6 +6,7 @@
 - No momento não possui nenhum tipo de interface ou interação com o usuário.
 
 Meu próximo passo será uma condição se o envio for por pix saldo na conta ou pix no crédito.
+Concluído o pix no crédito e de adicionei data e hora ao momento das transações.
 
 ## Dificuldades
 
