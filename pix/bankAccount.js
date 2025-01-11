@@ -4,55 +4,76 @@
             this.username = username;
             this.amountInTheAccount = amountInTheAccount;
             this.transferDate = new Date().toLocaleString('pt-BR', {timeZone: 'America/Sao_Paulo'});
-            this.iofPerMonth = (0.082 * 30);
+            this.iofPerMonth = this.calculateIof();
+        }
+
+        calculateIof()
+        {
+            return 0.082 * 30;
         }
 
         pixTransfer(amountSent, beneficiary, typeTransation)
-        {
-            if(beneficiary === this.username)
             {
-                console.log('Você não consegue enviar um valor para mesma titularidade.');
-                return 0;
-            }
+
+                if(amountSent <= 0)
+                {
+                    console.log('Valor inválido para transferência.');
+                    return 0;
+                }
+
+                if(beneficiary === this.username)
+                {
+                    console.log('Você não consegue enviar um valor para mesma titularidade.');
+                    return 0;
+                }
 
             if(typeTransation == 1)
             {
-                if(amountSent > this.amountInTheAccount)
-                {
-                    console.log('Valor enviado maior que o que você possui em conta!');
-                    amountSent = 0;
-                    return parseFloat(amountSent.toFixed(2));
-                }
-                else
-                {
-                    console.log(`Você enviou uma transferência para ${beneficiary} de R$ ${amountSent.toFixed(2)}`);
-                    this.amountInTheAccount -= amountSent;
-                    console.log(`Seu saldo na conta atual é de ${this.amountInTheAccount.toFixed(2)}`);
-                    console.log(`Pix enviado com sucesso! ${this.transferDate}`);
-                    return parseFloat(amountSent.toFixed(2));
-                }
+                return this.verifyTransationPix(amountSent, beneficiary);
             }
             else if (typeTransation == 2)
             {   
-                let iof = this.iofPerMonth
-                amountSent += iof
-                console.log(`O valor com os juros IOF fica no total de ${amountSent}`);
-                return parseFloat(amountSent.toFixed(2));
+                return this.verifyTransationPixOnCredit(amountSent);
+            }
+            else
+            {
+                console.log('Tipo de transação inválida.');
+                return 0;
             }
         }
-        
+
+        verifyTransationPix(amountSent, beneficiary)
+        {
+            if(amountSent > this.amountInTheAccount)
+            {
+                console.log('Valor enviado maior que o que você possui em conta!');
+                return 0;
+            }
+            this.amountInTheAccount -= amountSent;
+            console.log(`Você enviou uma transferência para ${beneficiary} de R$ ${amountSent.toFixed(2)}, ${this.transferDate}`);
+            console.log(`Seu saldo na conta atual é de ${this.amountInTheAccount.toFixed(2)}`);
+            return amountSent;
+        }
+
+        verifyTransationPixOnCredit(amountSent)
+        {
+            const total = amountSent + this.iofPerMonth;
+            console.log(`O valor com os juros IOF fica no total de ${total.toFixed(2)}`);
+            return total;
+        }
+
         pixReceipt(amountReceived,sender)
         {
             if(amountReceived <= 0)
             {
                 console.log('Nenhum envio.');
+                return 0;
             }
-            else
-            {
-                this.amountInTheAccount += amountReceived;
-                console.log('Total na conta do recebedor: R$ ', this.amountInTheAccount.toFixed(2) - this.iofPerMonth);
-                return console.log(`Você recebeu uma transferência de ${sender} no valor de R$ ${amountReceived.toFixed(2) - this.iofPerMonth}`);
-            }
+            
+            this.amountInTheAccount += amountReceived;
+            const balanceAfterIof = this.amountInTheAccount - this.iofPerMonth;
+            console.log('Total na conta do recebedor: R$ ', balanceAfterIof.toFixed(2));
+            return console.log(`Você recebeu uma transferência de ${sender} no valor de R$ ${amountReceived.toFixed(2)}`);
         }
     }
 
