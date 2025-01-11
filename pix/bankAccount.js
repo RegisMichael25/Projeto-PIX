@@ -3,9 +3,7 @@
         {
             this.username = username;
             this.amountInTheAccount = amountInTheAccount;
-            this.transferDate = new Date();
-            this.transferDate.year = `${this.transferDate.getDate()}/${this.transferDate.getMonth() + 1}/${this.transferDate.getFullYear()}`;
-            this.transferDate.hours = `${this.transferDate.getHours()}:${this.transferDate.getMinutes()}:${this.transferDate.getSeconds()}`;
+            this.transferDate = new Date().toLocaleString('pt-BR', {timeZone: 'America/Sao_Paulo'});
             this.iofPerMonth = (0.082 * 30);
         }
 
@@ -30,7 +28,7 @@
                     console.log(`Você enviou uma transferência para ${beneficiary} de R$ ${amountSent.toFixed(2)}`);
                     this.amountInTheAccount -= amountSent;
                     console.log(`Seu saldo na conta atual é de ${this.amountInTheAccount.toFixed(2)}`);
-                    console.log(`Pix enviado com sucesso! ${this.transferDate.year} - ${this.transferDate.hours}`);
+                    console.log(`Pix enviado com sucesso! ${this.transferDate}`);
                     return parseFloat(amountSent.toFixed(2));
                 }
             }
@@ -66,4 +64,4 @@
     // type 2 -> Pix on credit
     
     // joao.pixReceipt(joao.pixTransfer(200.00, regis.username, '1'), joao.username);
-    regis.pixReceipt(joao.pixTransfer(400.00, regis.username, '2'), joao.username);
+    regis.pixReceipt(joao.pixTransfer(400.00, regis.username, '1'), joao.username);
